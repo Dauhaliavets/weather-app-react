@@ -1,17 +1,19 @@
 import React from 'react';
 
-export default function Now() {
+const SYMBOL_DEGREE = '\u00B0';
+
+export default function Now({ weather }) {
 	return (
 		<div className='tabs__item active' data-tab='now'>
 			<span>NOW</span>
 			<div className='now__temperature temperature'>
-				<span>&nbsp;</span>
+				<span>{weather.temp}{SYMBOL_DEGREE}&nbsp;</span>
 			</div>
 			<div className='now__icon'>
 				{/* <img src='img/preloader.gif' alt='cloud' className='icon-now' /> */}
 			</div>
 			<div className='location__wrapper'>
-				<p className='location__name'>&nbsp;</p>
+				<p className='location__name'>{weather.city}&nbsp;</p>
 				<div className='like__icon'>
 					<svg
 						width='24'

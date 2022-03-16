@@ -1,25 +1,27 @@
 import React from 'react';
 
-export default function Details() {
+const SYMBOL_DEGREE = '\u00B0';
+
+export default function Details({ weather }) {
 	return (
 		<div className='tabs__item active' data-tab='details'>
 			<span>DETAILS</span>
-			<p className='location__name'></p>
+			<p className='location__name'>{weather.city}</p>
 			<div className='details__location'>
 				<p className='details__temperature temperature'>
-					Temperature: <span>14&deg</span>
+					Temperature: <span>{weather.temp}{SYMBOL_DEGREE}</span>
 				</p>
 				<p className='details__feels__like feels__like'>
-					Feels like: <span>10&deg</span>
+					Feels like: <span>{weather.feelsLike}{SYMBOL_DEGREE}</span>
 				</p>
 				<p className='details__weather weather'>
-					Weather: <span>Clouds</span>
+					Weather: <span>{weather.weather}</span>
 				</p>
 				<p className='details__sunrise sunrise'>
-					Sunrise: <span>03:21</span>
+					Sunrise: <span>{weather.sunrise.hours}:{weather.sunrise.minutes}</span>
 				</p>
 				<p className='details__sunset sunset'>
-					Sunset: <span>18:54</span>
+					Sunset: <span>{weather.sunset.hours}:{weather.sunset.minutes}</span>
 				</p>
 			</div>
 		</div>
