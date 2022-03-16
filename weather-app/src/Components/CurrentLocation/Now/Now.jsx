@@ -1,20 +1,31 @@
 import React from 'react';
+import { URLS, SYMBOL_DEGREE, ICON_SIZE_LARGE } from '../../../Helpers/utils';
 
-const SYMBOL_DEGREE = '\u00B0';
+export default function Now({ weather: {temp, city, iconCode}, favorites, addFavorite, removeFavorite }) {
+	const urlIcon = `${URLS.SERVER_ICON}${iconCode}@${ICON_SIZE_LARGE}.png`;
 
-export default function Now({ weather }) {
+	const isFavorites = favorites.includes(city);
+
+	const handlerClickLike = (value) => {
+		if(isFavorites) {
+			removeFavorite(city);
+		} else {
+			addFavorite(value);
+		}
+	}
+
 	return (
 		<div className='tabs__item active' data-tab='now'>
-			<span>NOW</span>
 			<div className='now__temperature temperature'>
-				<span>{weather.temp}{SYMBOL_DEGREE}&nbsp;</span>
+				<span>{temp}{SYMBOL_DEGREE}&nbsp;</span>
 			</div>
 			<div className='now__icon'>
+				<img src={urlIcon} alt='cloud' className='icon-now' />
 				{/* <img src='img/preloader.gif' alt='cloud' className='icon-now' /> */}
 			</div>
 			<div className='location__wrapper'>
-				<p className='location__name'>{weather.city}&nbsp;</p>
-				<div className='like__icon'>
+				<p className='location__name'>{city}&nbsp;</p>
+				<div className={isFavorites ? 'like__icon active' : 'like__icon'} onClick={() => handlerClickLike(city)}>
 					<svg
 						width='24'
 						height='25'

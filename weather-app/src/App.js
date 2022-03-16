@@ -8,14 +8,12 @@ import { URLS, UTIL_TO_API, API_KEY } from './Helpers/utils';
 
 function App() {
 	const [weather, setWeather] = useState({});
-	const [forecast, setForecast] = useState({})
-
-	useEffect(() => {
-
-	}, [])
+	const [forecast, setForecast] = useState({});
+	const [favorites, setFavorites] = useState([])
 
 	const requestWeather = (city) => {
 		const url = `${URLS.SERVER}?q=${city}&units=${UTIL_TO_API}&appid=${API_KEY}`;
+
 		fetch(url)
 		.then((response) => {
 			if (response.ok) {
@@ -44,15 +42,21 @@ function App() {
 
 	}
 
-	const requestIcon = () => {
+	const addFavorite = (city) => {
+		if(!favorites.includes(city)) {
+			setFavorites([...favorites, city]);
+		}
+	}
 
+	const removeFavorite = (city) => {
+		setFavorites(favorites.filter(item => item !== city));
 	}
 
 	return (
 		<div className='App'>
 			<div className='App-container'>
 				<Form requestWeather={requestWeather} requestForecast={requestForecast}/>
-				<CurrentLocation weather={weather} forecast={forecast}/>
+				<CurrentLocation weather={weather} forecast={forecast} favorites={favorites} addFavorite={addFavorite} removeFavorite={removeFavorite}/>
 				<FavoritesLocation />
 			</div>
 		</div>
