@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { transformData, transformDataForecast } from './Helpers/transform';
+import './Common/normalize.css';
 import './App.css';
 import CurrentLocation from './Components/CurrentLocation/CurrentLocation';
 import FavoritesLocation from './Components/FavoriteLocation/FavoritesLocation';
@@ -57,7 +58,7 @@ function App() {
 			<div className='App-container'>
 				<Form requestWeather={requestWeather} requestForecast={requestForecast}/>
 				<CurrentLocation weather={weather} forecast={forecast} favorites={favorites} addFavorite={addFavorite} removeFavorite={removeFavorite}/>
-				<FavoritesLocation />
+				<FavoritesLocation favorites={favorites}/>
 			</div>
 		</div>
 	);
