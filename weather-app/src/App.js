@@ -10,7 +10,16 @@ import { URLS, UTIL_TO_API, API_KEY } from './Helpers/utils';
 function App() {
 	const [weather, setWeather] = useState({});
 	const [forecast, setForecast] = useState({});
-	const [favorites, setFavorites] = useState([])
+	const [favorites, setFavorites] = useState([]);
+
+	useEffect(() => {
+		const favoritesFromStorage = localStorage.getItem('favorites');
+		setFavorites(JSON.parse(favoritesFromStorage));
+	}, []);
+
+	useEffect(() => {
+		localStorage.setItem('favorites', JSON.stringify(favorites));
+	}, [favorites]);
 
 	const requestWeather = (city) => {
 		const url = `${URLS.SERVER}?q=${city}&units=${UTIL_TO_API}&appid=${API_KEY}`;
