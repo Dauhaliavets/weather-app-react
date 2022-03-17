@@ -25,7 +25,7 @@ function App() {
 		.then((data) => {
 			setWeather(transformData(data));
 		})
-		.catch(console.log);
+		.catch(alert);
 	}
 
 	const requestForecast = (city) => {
@@ -39,7 +39,7 @@ function App() {
 				throw new Error(`${response.status === 404 ? 'Not found' : response.status}`)
 			})
 			.then(data => setForecast(data))
-			.catch(console.log);
+			.catch(alert);
 
 	}
 
@@ -54,11 +54,11 @@ function App() {
 	}
 
 	return (
-		<div className='App'>
-			<div className='App-container'>
+		<div className='app'>
+			<div className='app-container'>
 				<Form requestWeather={requestWeather} requestForecast={requestForecast}/>
 				<CurrentLocation weather={weather} forecast={forecast} favorites={favorites} addFavorite={addFavorite} removeFavorite={removeFavorite}/>
-				<FavoritesLocation favorites={favorites}/>
+				<FavoritesLocation requestWeather={requestWeather} requestForecast={requestForecast} favorites={favorites} removeFavorite={removeFavorite}/>
 			</div>
 		</div>
 	);

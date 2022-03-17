@@ -21,7 +21,6 @@ export default function Now({ weather: {temp, city, iconCode}, favorites, addFav
 			</div>
 			<div className='now__icon'>
 				<img src={urlIcon} alt='cloud' className='icon-now' />
-				{/* <img src='img/preloader.gif' alt='cloud' className='icon-now' /> */}
 			</div>
 			<div className='location__wrapper'>
 				<p className='location__name'>{city}&nbsp;</p>

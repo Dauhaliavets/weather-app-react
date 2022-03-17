@@ -32,7 +32,7 @@ export default function ForecastItem({ forecast: {iconCode, date, time, temperat
 				<div className='forecast__info__weather'>
 					<div className='forecast__main'>{weather}</div>
 					<div className='forecast__icon'>
-						<img src={urlIcon} width="50px" height="50px" alt="icon-weather" />
+						<img src={urlIcon} width="45" height="45" alt="icon-weather" />
 					</div>
 				</div>
 			</div>

@@ -3,6 +3,7 @@
 	padding: 7px 17px 8px 16px;
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 	height: 45px;
 	border-bottom: 1px solid black;
 }
