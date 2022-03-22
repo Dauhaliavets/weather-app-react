@@ -1,7 +1,7 @@
 import React from 'react';
 import { URLS, SYMBOL_DEGREE, ICON_SIZE_LARGE } from '../../../Helpers/utils';
 
-export default function Now({ weather: {temp, city, iconCode}, favorites, addFavorite, removeFavorite }) {
+export default function Now({ weather: {city, iconCode, temp}, favorites, addFavorite, removeFavorite }) {	
 	const urlIcon = `${URLS.SERVER_ICON}${iconCode}@${ICON_SIZE_LARGE}.png`;
 
 	const isFavorites = favorites.includes(city);

@@ -1,10 +1,10 @@
 import React from 'react';
-import { transformDataForecast } from '../../../Helpers/transform';
+import { transformForecastItem } from '../../../Helpers/transform';
 import ForecastItem from './ForecastItem/ForecastItem';
 
 export default function Forecast({ forecast }) {
 	const cards = forecast.list.map(item => {
-		const transformData = transformDataForecast(item);
+		const transformData = transformForecastItem(item);
 		return <ForecastItem key={item.dt / 100} forecast={transformData}/>
 	});
 

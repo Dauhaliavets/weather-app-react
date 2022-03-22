@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import './Form.css';
 
-export default function Form({ requestWeather, requestForecast }) {
+export default function Form({ getData }) {
 	const [cityName, setCityName] = useState('Minsk');
 
 	useEffect(() => {
-		requestWeather(cityName);
-		requestForecast(cityName);
+		getData(cityName);
 	}, []);
 
 	const handlerSubmit = (e) => {
-		requestWeather(cityName);
-		requestForecast(cityName);
+		getData(cityName);
 		e.preventDefault();
 	}
 

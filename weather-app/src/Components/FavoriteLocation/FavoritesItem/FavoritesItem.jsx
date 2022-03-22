@@ -1,11 +1,9 @@
 import React from 'react';
 import { SYMBOL_CROSS } from '../../../Helpers/utils';
 
-export default function FavoritesItem({ city, removeFavorite, requestWeather, requestForecast }) {
-	
+export default function FavoritesItem({ city, removeFavorite, getData }) {	
 	const handlerClickCity = (city) => {
-		requestWeather(city);
-		requestForecast(city);
+		getData(city);
 	};
 
 	const handlerClickRemove = (city) => {

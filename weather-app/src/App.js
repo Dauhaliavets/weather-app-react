@@ -1,15 +1,13 @@
 import { useEffect, useState } from 'react';
-import { transformData, transformDataForecast } from './Helpers/transform';
 import './Common/normalize.css';
 import './App.css';
 import CurrentLocation from './Components/CurrentLocation/CurrentLocation';
 import FavoritesLocation from './Components/FavoriteLocation/FavoritesLocation';
 import Form from './Components/Form/Form';
-import { URLS, UTIL_TO_API, API_KEY } from './Helpers/utils';
+import { requestData } from './Api/Api';
 
 function App() {
-	const [weather, setWeather] = useState({});
-	const [forecast, setForecast] = useState({});
+	const [weatherAll, setWeatherAll] = useState({weather: {}, forecast: {}});
 	const [favorites, setFavorites] = useState([]);
 
 	useEffect(() => {
@@ -21,37 +19,6 @@ function App() {
 		localStorage.setItem('favorites', JSON.stringify(favorites));
 	}, [favorites]);
 
-	const requestWeather = (city) => {
-		const url = `${URLS.SERVER}?q=${city}&units=${UTIL_TO_API}&appid=${API_KEY}`;
-
-		fetch(url)
-		.then((response) => {
-			if (response.ok) {
-				return response.json();
-			}
-			throw new Error(`${response.status === 404 ? 'Not found' : response.status}`);
-		})
-		.then((data) => {
-			setWeather(transformData(data));
-		})
-		.catch(alert);
-	}
-
-	const requestForecast = (city) => {
-		const urlForecast = `${URLS.SERVER_FORECAST}?q=${city}&units=${UTIL_TO_API}&appid=${API_KEY}`;
-
-		fetch(urlForecast)
-			.then(response => {
-				if(response.ok) {
-					return response.json();
-				}
-				throw new Error(`${response.status === 404 ? 'Not found' : response.status}`)
-			})
-			.then(data => setForecast(data))
-			.catch(alert);
-
-	}
-
 	const addFavorite = (city) => {
 		if(!favorites.includes(city)) {
 			setFavorites([...favorites, city]);
@@ -62,12 +29,16 @@ function App() {
 		setFavorites(favorites.filter(item => item !== city));
 	}
 
+	const getData = (city) => {
+		requestData(city).then(data => setWeatherAll(data));
+	}
+
 	return (
 		<div className='app'>
 			<div className='app-container'>
-				<Form requestWeather={requestWeather} requestForecast={requestForecast}/>
-				<CurrentLocation weather={weather} forecast={forecast} favorites={favorites} addFavorite={addFavorite} removeFavorite={removeFavorite}/>
-				<FavoritesLocation requestWeather={requestWeather} requestForecast={requestForecast} favorites={favorites} removeFavorite={removeFavorite}/>
+				<Form getData={getData}/>
+				<CurrentLocation weatherAll={weatherAll} favorites={favorites} addFavorite={addFavorite} removeFavorite={removeFavorite}/>
+				<FavoritesLocation getData={getData} favorites={favorites} removeFavorite={removeFavorite}/>
 			</div>
 		</div>
 	);

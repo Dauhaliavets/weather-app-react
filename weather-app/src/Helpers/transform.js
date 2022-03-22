@@ -1,4 +1,4 @@
-function transformData(data) {
+function transformWeather(data) {
 	return {
 		temp: Math.round(data.main.temp),
 		city: data.name,
@@ -14,9 +14,16 @@ function transformData(data) {
 			minutes: minTwoDigits(new Date(data.sys.sunset * 1000).getMinutes()),
 		},
 	};
-};
+}
 
-function transformDataForecast(data) {
+function transformForecast({ city, list }) {
+	return {
+		city,
+		list,
+	};
+}
+
+function transformForecastItem(data) {
 	return {
 		date: {
 			day: new Date(data.dt * 1000).getDate(),
@@ -33,10 +40,10 @@ function transformDataForecast(data) {
 		weather: data.weather[0].main,
 		iconCode: data.weather[0].icon,
 	};
-};
+}
 
 function minTwoDigits(num) {
 	return (num < 10 ? '0' : '') + num;
-};
+}
 
-export { transformData, transformDataForecast };
+export { transformWeather, transformForecast, transformForecastItem };
