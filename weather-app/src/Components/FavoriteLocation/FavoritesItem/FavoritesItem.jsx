@@ -1,13 +1,16 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { SYMBOL_CROSS } from '../../../Helpers/utils';
 
-export default function FavoritesItem({ city, removeFavorite, getData }) {	
+export default function FavoritesItem({ city, getData }) {	
+	const dispatch = useDispatch();
+
 	const handlerClickCity = (city) => {
 		getData(city);
 	};
 
 	const handlerClickRemove = (city) => {
-		removeFavorite(city);
+		dispatch({type: 'REMOVE_FAVORITE', payload: city});
 	}
 
 	return (

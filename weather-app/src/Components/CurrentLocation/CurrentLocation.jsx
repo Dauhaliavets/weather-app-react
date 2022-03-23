@@ -7,19 +7,17 @@ import TabBtn from './TabBtn/TabBtn';
 
 const dataTabBtns = ['Now', 'Details', 'Forecast'];
 
-export default function CurrentLocation({ weatherAll, favorites, addFavorite, removeFavorite }) {
-	const {weather, forecast} = weatherAll;
+export default function CurrentLocation({ weatherAll }) {
 	const [tab, setTab] = useState('now');
+
+	const {weather, forecast} = weatherAll;
+	
 	const handlerTabClick = (e) => setTab(e.target.dataset.tab);
 
 	return (
 		<div className='current__location'>
 			<div className='tabs'>
-				{tab === 'now' && <Now 
-														weather={weather} 
-														favorites={favorites} 
-														addFavorite={addFavorite} 
-														removeFavorite={removeFavorite}/>}
+				{tab === 'now' && <Now weather={weather} />}
 				{tab === 'details' && <Details weather={weather}/>}
 				{tab === 'forecast' && <Forecast forecast={forecast}/>}
 			</div>

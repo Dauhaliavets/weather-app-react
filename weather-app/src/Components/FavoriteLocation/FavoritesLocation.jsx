@@ -1,14 +1,16 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import FavoritesItem from './FavoritesItem/FavoritesItem';
 import './FavoritesLocation.css';
 
-export default function FavoritesLocation({ favorites, removeFavorite, getData }) {
-	const favoritesList = favorites.map((item, ind) => {
+export default function FavoritesLocation({ getData }) {
+	const selectorFavorites = useSelector(state => state.favorites.favorites);
+
+	const favoritesList = selectorFavorites.map((item, ind) => {
 		return (
 			<FavoritesItem
 				key={ind + 1}
 				city={item}
-				removeFavorite={removeFavorite}
 				getData={getData}
 			/>
 		);

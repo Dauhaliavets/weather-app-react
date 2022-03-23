@@ -1,16 +1,20 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { URLS, SYMBOL_DEGREE, ICON_SIZE_LARGE } from '../../../Helpers/utils';
 
-export default function Now({ weather: {city, iconCode, temp}, favorites, addFavorite, removeFavorite }) {	
+export default function Now({ weather: {city, iconCode, temp} }) {	
+	const selectorFavorites = useSelector(state => state.favorites.favorites);
+	const dispatch = useDispatch();
+
 	const urlIcon = `${URLS.SERVER_ICON}${iconCode}@${ICON_SIZE_LARGE}.png`;
 
-	const isFavorites = favorites.includes(city);
+	const isFavorites = selectorFavorites.includes(city);
 
 	const handlerClickLike = (value) => {
 		if(isFavorites) {
-			removeFavorite(city);
+			dispatch({type: 'REMOVE_FAVORITE', payload: city});
 		} else {
-			addFavorite(value);
+			dispatch({type: 'ADD_FAVORITE', payload: value});
 		}
 	}
 

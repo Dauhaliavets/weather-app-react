@@ -8,26 +8,16 @@ import { requestData } from './Api/Api';
 
 function App() {
 	const [weatherAll, setWeatherAll] = useState({weather: {}, forecast: {}});
-	const [favorites, setFavorites] = useState([]);
+	// const [favorites, setFavorites] = useState([]);
 
-	useEffect(() => {
-		const favoritesFromStorage = localStorage.getItem('favorites');
-		setFavorites(JSON.parse(favoritesFromStorage));
-	}, []);
+	// useEffect(() => {
+	// 	const favoritesFromStorage = localStorage.getItem('favorites');
+	// 	setFavorites(JSON.parse(favoritesFromStorage));
+	// }, []);
 
-	useEffect(() => {
-		localStorage.setItem('favorites', JSON.stringify(favorites));
-	}, [favorites]);
-
-	const addFavorite = (city) => {
-		if(!favorites.includes(city)) {
-			setFavorites([...favorites, city]);
-		}
-	}
-
-	const removeFavorite = (city) => {
-		setFavorites(favorites.filter(item => item !== city));
-	}
+	// useEffect(() => {
+	// 	localStorage.setItem('favorites', JSON.stringify(favorites));
+	// }, [favorites]);
 
 	const getData = (city) => {
 		requestData(city).then(data => setWeatherAll(data));
@@ -37,8 +27,8 @@ function App() {
 		<div className='app'>
 			<div className='app-container'>
 				<Form getData={getData}/>
-				<CurrentLocation weatherAll={weatherAll} favorites={favorites} addFavorite={addFavorite} removeFavorite={removeFavorite}/>
-				<FavoritesLocation getData={getData} favorites={favorites} removeFavorite={removeFavorite}/>
+				<CurrentLocation weatherAll={weatherAll}/>
+				<FavoritesLocation getData={getData}/>
 			</div>
 		</div>
 	);

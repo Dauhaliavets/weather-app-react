@@ -24,6 +24,7 @@ export default function Form({ getData }) {
 				id='citySearch'
 				placeholder='Search city'
 				onChange={onChange}
+				value={cityName}
 			/>
 			<button className='form__search-button' type='submit'></button>
 		</form>
