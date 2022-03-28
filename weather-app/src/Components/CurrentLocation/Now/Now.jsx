@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { URLS, SYMBOL_DEGREE, ICON_SIZE_LARGE } from '../../../Helpers/utils';
+import { addFavorite, removeFavorite } from '../../../store/actions';
 
 export default function Now({ weather: {city, iconCode, temp} }) {	
 	const selectorFavorites = useSelector(state => state.favorites.favorites);
@@ -12,9 +13,9 @@ export default function Now({ weather: {city, iconCode, temp} }) {
 
 	const handlerClickLike = (value) => {
 		if(isFavorites) {
-			dispatch({type: 'REMOVE_FAVORITE', payload: city});
+			dispatch(removeFavorite(city));
 		} else {
-			dispatch({type: 'ADD_FAVORITE', payload: value});
+			dispatch(addFavorite(value));
 		}
 	}
 

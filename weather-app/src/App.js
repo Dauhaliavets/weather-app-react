@@ -8,16 +8,6 @@ import { requestData } from './Api/Api';
 
 function App() {
 	const [weatherAll, setWeatherAll] = useState({weather: {}, forecast: {}});
-	// const [favorites, setFavorites] = useState([]);
-
-	// useEffect(() => {
-	// 	const favoritesFromStorage = localStorage.getItem('favorites');
-	// 	setFavorites(JSON.parse(favoritesFromStorage));
-	// }, []);
-
-	// useEffect(() => {
-	// 	localStorage.setItem('favorites', JSON.stringify(favorites));
-	// }, [favorites]);
 
 	const getData = (city) => {
 		requestData(city).then(data => setWeatherAll(data));
