@@ -1,35 +1,49 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { URLS, SYMBOL_DEGREE, ICON_SIZE_LARGE } from '../../../Helpers/utils';
+import { createUrlToIcon } from '../../../Api/Api';
+import { SYMBOL_DEGREE } from '../../../Helpers/utils';
 import { addFavorite, removeFavorite } from '../../../store/actions';
 
-export default function Now({ weather: {city, iconCode, temp} }) {	
-	const selectorFavorites = useSelector(state => state.favorites.favorites);
-	const dispatch = useDispatch();
+export default function Now() {
+	const selectorWeather = useSelector(
+		(state) => state.weatherAll.weatherAll.weather
+	);
 
-	const urlIcon = `${URLS.SERVER_ICON}${iconCode}@${ICON_SIZE_LARGE}.png`;
+	// TODO: add Preloader
+	
+	const { city = '', iconCode = '', temp = '' } = selectorWeather;
+
+	const selectorFavorites = useSelector((state) => state.favorites.favorites);
+	const dispatch = useDispatch();
+	const urlIcon = createUrlToIcon(iconCode);
 
 	const isFavorites = selectorFavorites.includes(city);
 
 	const handlerClickLike = (value) => {
-		if(isFavorites) {
+		if (isFavorites) {
 			dispatch(removeFavorite(city));
 		} else {
 			dispatch(addFavorite(value));
 		}
-	}
+	};
 
 	return (
 		<div className='tabs__item active' data-tab='now'>
 			<div className='now__temperature temperature'>
-				<span>{temp}{SYMBOL_DEGREE}&nbsp;</span>
+				<span>
+					{temp}
+					{SYMBOL_DEGREE}&nbsp;
+				</span>
 			</div>
 			<div className='now__icon'>
 				<img src={urlIcon} alt='cloud' className='icon-now' />
 			</div>
 			<div className='location__wrapper'>
 				<p className='location__name'>{city}&nbsp;</p>
-				<div className={isFavorites ? 'like__icon active' : 'like__icon'} onClick={() => handlerClickLike(city)}>
+				<div
+					className={isFavorites ? 'like__icon active' : 'like__icon'}
+					onClick={() => handlerClickLike(city)}
+				>
 					<svg
 						width='24'
 						height='25'

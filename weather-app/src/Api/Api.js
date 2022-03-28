@@ -1,5 +1,7 @@
 import { transformForecast, transformWeather } from '../Helpers/transform';
-import { URLS, UTIL_TO_API, API_KEY } from '../Helpers/utils';
+import { URLS, UTIL_TO_API, API_KEY, ICON_SIZE_LARGE } from '../Helpers/utils';
+
+export const createUrlToIcon = (iconCode) => `${URLS.SERVER_ICON}${iconCode}@${ICON_SIZE_LARGE}.png`
 
 const createURL = (url, query) =>
 	`${url}?q=${query}&units=${UTIL_TO_API}&appid=${API_KEY}`;

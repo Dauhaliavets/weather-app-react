@@ -2,12 +2,13 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { SYMBOL_CROSS } from '../../../Helpers/utils';
 import { removeFavorite } from '../../../store/actions';
+import { fetchWeather } from '../../../store/weatherReducers';
 
-export default function FavoritesItem({ city, getData }) {	
+export default function FavoritesItem({ city }) {	
 	const dispatch = useDispatch();
 
 	const handlerClickCity = (city) => {
-		getData(city);
+		dispatch(fetchWeather(city));
 	};
 
 	const handlerClickRemove = (city) => {

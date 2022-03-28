@@ -1,7 +1,13 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { SYMBOL_DEGREE } from '../../../Helpers/utils';
 
-export default function Details({ weather: {city, temp, feelsLike, weather, sunrise, sunset} }) {
+export default function Details() {
+	const selectorWeather = useSelector(
+		(state) => state.weatherAll.weatherAll.weather
+	);
+	const { city, temp, feelsLike, weather, sunrise, sunset } = selectorWeather;
+
 	return (
 		<div className='tabs__item active' data-tab='details'>
 			<p className='location__name'>{city}</p>

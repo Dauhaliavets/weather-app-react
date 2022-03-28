@@ -1,24 +1,25 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import './Common/normalize.css';
 import './App.css';
 import CurrentLocation from './Components/CurrentLocation/CurrentLocation';
 import FavoritesLocation from './Components/FavoriteLocation/FavoritesLocation';
 import Form from './Components/Form/Form';
-import { requestData } from './Api/Api';
+import { useDispatch } from 'react-redux';
+import { fetchWeather } from './store/weatherReducers';
 
 function App() {
-	const [weatherAll, setWeatherAll] = useState({weather: {}, forecast: {}});
+	const dispatch = useDispatch();
 
-	const getData = (city) => {
-		requestData(city).then(data => setWeatherAll(data));
-	}
+	useEffect(() => {
+		dispatch(fetchWeather('Paris'));
+	}, []);
 
 	return (
 		<div className='app'>
 			<div className='app-container'>
-				<Form getData={getData}/>
-				<CurrentLocation weatherAll={weatherAll}/>
-				<FavoritesLocation getData={getData}/>
+				<Form/>
+				<CurrentLocation/>
+				<FavoritesLocation/>
 			</div>
 		</div>
 	);

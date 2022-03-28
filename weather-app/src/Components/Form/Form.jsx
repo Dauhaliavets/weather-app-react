@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { fetchWeather } from '../../store/weatherReducers';
 import './Form.css';
 
-export default function Form({ getData }) {
-	const [cityName, setCityName] = useState('Minsk');
-
-	useEffect(() => {
-		getData(cityName);
-	}, []);
+export default function Form() {
+	const dispatch = useDispatch();
+	const [cityName, setCityName] = useState('');
 
 	const handlerSubmit = (e) => {
-		getData(cityName);
+		dispatch(fetchWeather(cityName));
 		e.preventDefault();
 	}
 

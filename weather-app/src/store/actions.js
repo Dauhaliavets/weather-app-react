@@ -1,6 +1,6 @@
 const ADD_FAVORITE = 'ADD_FAVORITE';
 const REMOVE_FAVORITE = 'REMOVE_FAVORITE';
-const GET_DATA = 'GET_DATA';
+const SET_DATA = 'SET_DATA';
 
 const addFavorite = (name) => {
 	return { 
@@ -16,11 +16,11 @@ const removeFavorite = (name) => {
 	};
 };
 
-const getData = (name) => {
+const setData = (name) => {
 	return {
-		type: GET_DATA,
-		name
+		type: SET_DATA,
+		payload: name,
 	}
 }
 
-export { ADD_FAVORITE, REMOVE_FAVORITE, GET_DATA, addFavorite, removeFavorite, getData };
+export { ADD_FAVORITE, REMOVE_FAVORITE, SET_DATA, addFavorite, removeFavorite, setData };

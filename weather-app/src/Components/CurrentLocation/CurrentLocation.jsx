@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import './CurrentLocation.css';
 import Details from './Details/Details';
 import Forecast from './Forecast/Forecast';
@@ -7,19 +8,17 @@ import TabBtn from './TabBtn/TabBtn';
 
 const dataTabBtns = ['Now', 'Details', 'Forecast'];
 
-export default function CurrentLocation({ weatherAll }) {
+export default function CurrentLocation() {
 	const [tab, setTab] = useState('now');
-
-	const {weather, forecast} = weatherAll;
 	
 	const handlerTabClick = (e) => setTab(e.target.dataset.tab);
 
 	return (
 		<div className='current__location'>
 			<div className='tabs'>
-				{tab === 'now' && <Now weather={weather} />}
-				{tab === 'details' && <Details weather={weather}/>}
-				{tab === 'forecast' && <Forecast forecast={forecast}/>}
+				{tab === 'now' && <Now />}
+				{tab === 'details' && <Details />}
+				{tab === 'forecast' && <Forecast />}
 			</div>
 			<ul className='tabs__control'>
 				{dataTabBtns.map((data, index) => <TabBtn key={index + 1} data={data} tabActive={tab} handlerTabClick={handlerTabClick}/>)}
